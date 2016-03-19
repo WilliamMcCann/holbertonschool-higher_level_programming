@@ -1,4 +1,4 @@
-# usage
+# function retrieves data from github api
 require 'httpclient'
 
 extheaders = {
