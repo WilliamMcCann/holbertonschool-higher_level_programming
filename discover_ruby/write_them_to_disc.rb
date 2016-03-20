@@ -12,9 +12,11 @@ x = clnt.get_content('https://api.github.com/search/repositories?q=language:ruby
 
 begin
   file = File.open("/tmp/45", "w")
-  file.write(x) 
+  file.write(x)
 rescue IOError => e
   #some error occur, dir not writable etc.
 ensure
   file.close unless file.nil?
+
+puts "The file was saved!"
 end
