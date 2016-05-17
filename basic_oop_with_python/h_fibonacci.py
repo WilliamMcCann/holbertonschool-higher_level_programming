@@ -1,3 +1,4 @@
+'''returns the fibonacci number of a given position'''
 def fibonacci(number):
 	if number == 0:
 		return 0
