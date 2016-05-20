@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 
 '''describes a Person class'''
 class Person():
@@ -105,3 +106,25 @@ class Senior(Person):
 
     def can_vote(self):
         return True
+
+'''JSON for Task 3'''
+
+def load_from_json(self, json):
+    if json is not hash:
+        raise Exception("json is not valid")
+    json['id'] = self.__id
+    json['eyes_color'] = self.__eyes_color
+    json['genre'] = self.__genre
+    json['date_of_birth'] = self.__date_of_birth
+    json['first_name'] = self.__first_name
+    json['last_name'] = self.last_name
+
+'''two new functions for Task Three'''
+
+def save_to_file(list, filename):
+    json.dump(list, filename)
+
+def load_from_file(filename):
+    if filename == " " or not str:
+        raise Exception("filename is not valid or doesn't exist")
+    json.load(filename)
