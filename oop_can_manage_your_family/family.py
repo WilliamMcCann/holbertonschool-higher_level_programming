@@ -50,6 +50,31 @@ class Person():
     def age(self):
         today = [5, 20, 2016]
         return today[2] - self.__date_of_birth[2] - ((today[0], today[2]) < (self.__date_of_birth[0], self.__date_of_birth[1]))
+'''JSON for Task 3'''
+
+    def json(self):
+        dictionary = {
+        'id':self.__id,
+        'eyes_color':self.__eyes_color,
+        'genre':self.__genre,
+        'date_of_birth':self.__date_of_birth,
+        'first_name':self.__first_name,
+        'last_name':self.last_name,
+        'kind':self.__class
+        }
+        return dictionary
+
+    def load_from_json(self, json):
+        if json is not hash:
+            raise Exception("json is not valid")
+        self.__id = json['id']
+        self.__eyes_color = json['eyes_color']
+        self.__genre = json['genre']
+        self.__date_of_birth = json['date_of_birth']
+        self.__first_name = json['first_name']
+        self.last_name = json['last_name']
+        type(x).__name__ = json['kind']
+
 
 '''describes child classes of Person'''
 class Baby(Person):
@@ -107,31 +132,6 @@ class Senior(Person):
 
     def can_vote(self):
         return True
-
-'''JSON for Task 3'''
-
-def json(self):
-    dictionary = {
-    'id':self.__id,
-    'eyes_color':self.__eyes_color,
-    'genre':self.__genre,
-    'date_of_birth':self.__date_of_birth,
-    'first_name':self.__first_name,
-    'last_name':self.last_name,
-    'kind':self.__class
-    }
-    return dictionary
-
-def load_from_json(self, json):
-    if json is not hash:
-        raise Exception("json is not valid")
-    self.__id = json['id']
-    self.__eyes_color = json['eyes_color']
-    self.__genre = json['genre']
-    self.__date_of_birth = json['date_of_birth']
-    self.__first_name = json['first_name']
-    self.last_name = json['last_name']
-    type(x).__name__ = json['kind']
 
 '''two new functions for Task Three'''
 
