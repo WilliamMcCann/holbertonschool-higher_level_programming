@@ -50,7 +50,8 @@ class Person():
     def age(self):
         today = [5, 20, 2016]
         return today[2] - self.__date_of_birth[2] - ((today[0], today[2]) < (self.__date_of_birth[0], self.__date_of_birth[1]))
-'''JSON for Task 3'''
+
+    '''JSON for Task 3'''
 
     def json(self):
         dictionary = {
@@ -60,7 +61,7 @@ class Person():
         'date_of_birth':self.__date_of_birth,
         'first_name':self.__first_name,
         'last_name':self.last_name,
-        'kind':self.__class
+        'kind':self.__class__.__name__
         }
         return dictionary
 
@@ -73,7 +74,6 @@ class Person():
         self.__date_of_birth = json['date_of_birth']
         self.__first_name = json['first_name']
         self.last_name = json['last_name']
-        type(x).__name__ = json['kind']
 
 
 '''describes child classes of Person'''
@@ -136,13 +136,28 @@ class Senior(Person):
 '''two new functions for Task Three'''
 
 def save_to_file(list, filename):
-    with open('list') as data_file:
-        data = json.dumps(data_file)
-    with open('filename', 'w') as outfile:
-        json.loads(data, outfile)
+    list_json = []
+    for i in list:
+        list_json.append(i.json())
+    with open(filename, 'w') as outfile:
+        json.dump(list_json, outfile)
 
 def load_from_file(filename):
-    if filename == " " or not str:
-        raise Exception("filename is not valid or doesn't exist")
-    with open (filename, 'a+') as input:
-        more_data = json.dumps(input)
+    with open(filename) as outfile:
+        data = json.load(outfile)
+    # here, data is a list of hash, now you have to convert to Person or Baby... class`
+    list = []
+    for i in data:
+        if i['kind'] == "Baby":
+            p = Baby(1, "Sam", [1, 1, 2000], "Male", "Green") # default values`
+        if i['kind'] == "Senior":
+            p = Senior(1, "Sam", [1, 1, 2000], "Male", "Green") # default values`
+        if i['kind'] == "Teenager":
+            p = Teenager(1, "Sam", [1, 1, 2000], "Male", "Green") # default values`
+        if i['kind'] == "Adult":
+            p = Adult(1, "Sam", [1, 1, 2000], "Male", "Green") # default values`
+        else:
+            p = Person(1, "Sam", [1, 1, 2000], "Male", "Green") # default values`
+        p.load_from_json(i)
+        list.append(p)
+    return list
