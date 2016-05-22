@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import itertools
 
 '''describes a Person class'''
 class Person():
@@ -109,22 +110,39 @@ class Senior(Person):
 
 '''JSON for Task 3'''
 
+def json(self):
+    dictionary = {
+    'id':self.__id,
+    'eyes_color':self.__eyes_color,
+    'genre':self.__genre,
+    'date_of_birth':self.__date_of_birth,
+    'first_name':self.__first_name,
+    'last_name':self.last_name,
+    'kind':self.__class
+    }
+    return dictionary
+
 def load_from_json(self, json):
     if json is not hash:
         raise Exception("json is not valid")
-    json['id'] = self.__id
-    json['eyes_color'] = self.__eyes_color
-    json['genre'] = self.__genre
-    json['date_of_birth'] = self.__date_of_birth
-    json['first_name'] = self.__first_name
-    json['last_name'] = self.last_name
+    self.__id = json['id']
+    self.__eyes_color = json['eyes_color']
+    self.__genre = json['genre']
+    self.__date_of_birth = json['date_of_birth']
+    self.__first_name = json['first_name']
+    self.last_name = json['last_name']
+    type(x).__name__ = json['kind']
 
 '''two new functions for Task Three'''
 
 def save_to_file(list, filename):
-    json.dump(list, filename)
+    with open('list') as data_file:
+        data = json.dumps(data_file)
+    with open('filename', 'w') as outfile:
+        json.loads(data, outfile)
 
 def load_from_file(filename):
     if filename == " " or not str:
         raise Exception("filename is not valid or doesn't exist")
-    json.load(filename)
+    with open (filename, 'a+') as input:
+        more_data = json.dumps(input)
