@@ -14,8 +14,7 @@ class Person():
         if first_name == " " or not str:
             raise Exception("string is not a string")
         self.__first_name = first_name
-        self.last_name = " "
-        if len(date_of_birth) is not 3 and all(isinstance(n, int) for n in date_of_birth):
+        self.last_name = last_name
             raise Exception("date_of_birth is not a valid date")
         self.__date_of_birth = date_of_birth
         if genre not in Person.GENRES or not str:
@@ -24,6 +23,7 @@ class Person():
         if eyes_color not in Person.EYES_COLORS or not str:
             raise Exception("eyes_color is not valid")
         self.__eyes_color = eyes_color
+        self.is_married_to = is_married_to
 
     def get_id(self):
         return self.__id
@@ -51,6 +51,9 @@ class Person():
         today = [5, 20, 2016]
         return today[2] - self.__date_of_birth[2] - ((today[0], today[2]) < (self.__date_of_birth[0], self.__date_of_birth[1]))
 
+    def is_married_to (int):
+        return p.id
+
     '''JSON for Task 3'''
 
     def json(self):
@@ -61,12 +64,13 @@ class Person():
         'date_of_birth':self.__date_of_birth,
         'first_name':self.__first_name,
         'last_name':self.last_name,
-        'kind':self.__class__.__name__
+        'kind':self.__class__.__name__,
+        'is_married_to':self.is_married_to
         }
         return dictionary
 
     def load_from_json(self, json):
-        if json is not hash:
+        if type(json) is not dict:
             raise Exception("json is not valid")
         self.__id = json['id']
         self.__eyes_color = json['eyes_color']
@@ -74,7 +78,7 @@ class Person():
         self.__date_of_birth = json['date_of_birth']
         self.__first_name = json['first_name']
         self.last_name = json['last_name']
-
+        self.is_married_to = json['is_married_to']
 
 '''describes child classes of Person'''
 class Baby(Person):
@@ -91,6 +95,28 @@ class Baby(Person):
     def can_vote(self):
         return False
 
+    def can_be_married(self):
+        return False
+
+    def is_married(self):
+        if is_married_to is not None:
+            return True
+
+    def divorce(self, p):
+         self.is_married_to = 0
+         p.is_married_to = 0
+
+    def just_married_with(self, p):
+        if self.is_married_to is not 0 or p.is_married_to is not 0:
+            raise Exception("Already married")
+        if self.can_be_married is False or p.can_be_married is False:
+            raise Exception("Can't be married")
+        else:
+            self.is_married_to = p.id
+            p.is_married_to = self.id
+            if self.genre == Female:
+                self.last_name = p.last_name
+
 class Teenager(Person):
 
     def can_run(self):
@@ -104,6 +130,17 @@ class Teenager(Person):
 
     def can_vote(self):
         return False
+
+    def can_be_married(self):
+        return False
+
+    def is_married(self):
+        if is_married_to is not None:
+            return True
+
+    def divorce(self, p):
+         self.is_married_to = 0
+         p.is_married_to = 0
 
 class Adult(Person):
 
@@ -119,6 +156,17 @@ class Adult(Person):
     def can_vote(self):
         return True
 
+    def can_be_married(self):
+        return True
+
+    def is_married(self):
+        if is_married_to is not None:
+            return True
+
+    def divorce(self, p):
+         self.is_married_to = 0
+         p.is_married_to = 0
+
 class Senior(Person):
 
     def can_run(self):
@@ -132,6 +180,17 @@ class Senior(Person):
 
     def can_vote(self):
         return True
+
+    def can_be_married(self):
+        return True
+
+    def is_married(self):
+        if is_married_to is not None:
+            return True
+
+    def divorce(self, p):
+         self.is_married_to = 0
+         p.is_married_to = 0
 
 '''two new functions for Task Three'''
 
