@@ -1,0 +1,7 @@
+1) 2
+2) 4
+3) red
+4) 39.95
+5) 15 ("product_image" has a value, but presumably "product_image" is a different key from "image"; also all of the color values are repeated so probably represent only 4 actual files, but technically I would read them as different values because they occupy different and unique locations on the tree)
+6) <item_number> (Although the question is ambiguous because "children" is plural so the answer should be plural)
+7) <color_swatch> (see #6)
