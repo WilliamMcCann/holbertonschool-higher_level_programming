@@ -1,8 +1,9 @@
 import json
+from xml.dom import minidom
+from xml.dom.minidom import parse, parseString
 
 class Car:
     def __init__(self, *args, **kwargs):
-
         if len(args) > 0 and isinstance(args[0], dict):
 
             hash = args[0]
@@ -46,3 +47,18 @@ class Car:
 
     def to_json_string(self):
         return json.dumps(self.to_hash())
+
+    def to_xml_node(self, doc):
+        car = doc.createElement('car')
+        car.setAttribute('nb_doors', "5")
+
+        name = doc.createElement('name')
+        name_content = doc.createCDATASection("Rogue")
+        name.appendChild(name_content)
+        car.appendChild(name)
+
+        brand = doc.createElement('brand')
+        brand_content = doc.createTextNode("Nissan")
+        brand.appendChild(brand_content)
+        car.appendChild(brand)
+        return car
