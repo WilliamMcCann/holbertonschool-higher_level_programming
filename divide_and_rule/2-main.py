@@ -14,3 +14,4 @@ for t in reverse_str_threads:
     t.join()
 
 print "%s" % ReverseStrThread.sentence
+print reverse_str_threads
